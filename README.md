@@ -15,6 +15,7 @@ After calling the `setup!` function at the relevant namespace,
 ```
 one can just keep using Clerk the way they like.
 
-Values which have kind information provided by Kindly, will be displayed accordingly. Other values will be displayed the usual way Clerk treats them.
+* Values which have kind information provided by Kindly will be displayed accordingly. 
+* Other values will be displayed the usual way Clerk treats them.
 
 See the [example project](./examples/example-project).

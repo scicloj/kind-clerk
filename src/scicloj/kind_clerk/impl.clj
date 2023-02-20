@@ -65,10 +65,26 @@
 
 (add-kind-transform!
  :kind/dataset (fn [v]
-                 (-> v
-                     pprint/pprint
-                     with-out-str
-                     clerk/md)))
+                 (clerk/html
+                  [:code {:class :scicloj-dataset}
+                   [:style "
+.scicloj-dataset th {
+  padding: 2px;
+}
+.scicloj-dataset td {
+  padding: 2px;
+}
+.scicloj-dataset th {
+  background-color: #ddd;
+}
+.scicloj-dataset tr:nth-child(even) {
+  background-color: #f6f6f6;
+}
+"]
+                   (-> v
+                       pprint/pprint
+                       with-out-str
+                       clerk/md)])))
 
 (add-kind-transform!
  :kind/cytoscape (fn [v]

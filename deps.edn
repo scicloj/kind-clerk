@@ -4,7 +4,8 @@
  :aliases {:build {:deps {io.github.seancorfield/build-clj
                           {:git/tag "v0.6.4" :git/sha "c21cfde"}}
                    :ns-default build}
-           :dev {:extra-deps {org.scicloj/kindly-default {:mvn/version "1-alpha5"}}}
+           :dev {:extra-deps {org.scicloj/kindly-default {:mvn/version "1-alpha5"}
+                              scicloj/tablecloth {:mvn/version "6.102"}}}
            :test {:extra-paths ["test"]
                   :extra-deps {org.clojure/test.check {:mvn/version "1.1.1"}
                                io.github.cognitect-labs/test-runner

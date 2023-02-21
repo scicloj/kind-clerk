@@ -77,6 +77,27 @@
 
 (require '[tablecloth.api :as tc])
 
-(-> [{:x 1 :y 2 :z 3}
-     {:y 4 :z 5}]
+(-> {:x [1 3 5]
+     :y [2 4 6]}
     tc/dataset)
+
+;; ## Tables
+
+;; We can also use Clerk's table view:
+
+(-> {:x [1 3 5]
+     :y [2 4 6]}
+    tc/dataset
+    (kindly/consider :kind/table))
+
+(-> {:column-names [:x :y]
+     :row-vectors [[1 2]
+                   [3 4]
+                   [5 6]]}
+    (kindly/consider :kind/table))
+
+(-> {:column-names [:x :y]
+     :row-maps [{:x 1 :y 2}
+                {:x 3 :y 4}
+                {:x 5 :y 6}]}
+    (kindly/consider :kind/table))

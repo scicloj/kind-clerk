@@ -7,4 +7,4 @@
 (kindly-default/setup!)
 
 ;; Start Clerk.
-(clerk/serve! {})
+(clerk/serve! {:browse? true})

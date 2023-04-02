@@ -6,9 +6,9 @@
   {:pred string?
    :transform-fn clerk/mark-presented
    :render-fn '(fn [value]
-                 (v/html
+                 (nextjournal.clerk.viewer/html
                   (when value
-                    [v/with-d3-require {:package ["cytoscape@3.21.0"]}
+                    [nextjournal.clerk.viewer/with-d3-require {:package ["cytoscape@3.21.0"]}
                      (fn [cytoscape]
                        [:div {:style {:height "500px"}
                               :ref
@@ -24,9 +24,9 @@
    :transform-fn clerk/mark-presented
    :render-fn
    '(fn [value]
-      (v/html
+      (nextjournal.clerk.viewer/html
        (when value
-         [v/with-d3-require {:package ["echarts@5.3.2"]}
+         [nextjournal.clerk.viewer/with-d3-require {:package ["echarts@5.3.2"]}
           (fn [echarts]
             [:div {:style {:height "500px"}
                    :ref (fn [el]

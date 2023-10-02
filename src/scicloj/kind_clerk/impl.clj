@@ -97,31 +97,31 @@
                        with-out-str
                        clerk/md)])))
 
-;; (add-kind-transform!
-;;  :kind/table
-;;  (fn [dataset-or-options]
-;;    (if (-> dataset-or-options
-;;            class
-;;            str
-;;            (= "class tech.v3.dataset.impl.dataset.Dataset"))
-;;      (nextjournal.clerk/table
-;;       {:head (-> dataset-or-options keys)
-;;        :rows (->> dataset-or-options
-;;                   vals
-;;                   (apply map vector))})
-;;      (let [{:keys [row-maps row-vectors column-names]} dataset-or-options]
-;;        (assert column-names)
-;;        (if row-vectors
-;;          (nextjournal.clerk/table
-;;           {:head column-names
-;;            :rows row-vectors})
-;;          (do
-;;            (assert row-maps)
-;;            (nextjournal.clerk/table
-;;             {:head column-names
-;;              :rows (->> row-maps
-;;                         (map #(->> column-names
-;;                                    (map %))))})))))))
+(add-kind-transform!
+ :kind/table
+ (fn [dataset-or-options]
+   (if (-> dataset-or-options
+           class
+           str
+           (= "class tech.v3.dataset.impl.dataset.Dataset"))
+     (nextjournal.clerk/table
+      {:head (-> dataset-or-options keys)
+       :rows (->> dataset-or-options
+                  vals
+                  (apply map vector))})
+     (let [{:keys [row-maps row-vectors column-names]} dataset-or-options]
+       (assert column-names)
+       (if row-vectors
+         (nextjournal.clerk/table
+          {:head column-names
+           :rows row-vectors})
+         (do
+           (assert row-maps)
+           (nextjournal.clerk/table
+            {:head column-names
+             :rows (->> row-maps
+                        (map #(->> column-names
+                                   (map %))))})))))))
 
 (add-kind-transform!
  :kind/cytoscape (fn [v]

@@ -1,12 +1,21 @@
+;; # Kind-Clerk demo
+
 (ns index
   (:require [scicloj.kindly.v4.kind :as kind]
             [scicloj.kind-clerk.api :as kind-clerk]))
 
 (kind-clerk/setup!)
 
-;; ## afsdfasfd
+;; ## Plain data
 
-(+ 1 2)
+[1 1 3]
+
+{:x "A"
+ :y "B"}
+
+
+;; ## Hiccup
+
 
 (kind/hiccup
  [:big 1234])
@@ -88,13 +97,11 @@
     kind/table)
 
 (-> {:column-names [:x :y]
-     :row-vectors [[1 2]
-                   [3 4]
-                   [5 6]]}
+     :row-vectors (for [i (range 100)]
+                    [i (inc i)])}
     kind/table)
 
 (-> {:column-names [:x :y]
-     :row-maps [{:x 1 :y 2}
-                {:x 3 :y 4}
-                {:x 5 :y 6}]}
+     :row-maps (for [i (range 100)]
+                 {:x i :y (inc i)})}
     kind/table)

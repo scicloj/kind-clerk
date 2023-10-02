@@ -31,23 +31,25 @@
                    not)))]
   (pred (+ 1 2)))
 
-(defn extract-context [v]
+(defn extract-kindly-context [clerk-context]
   (kindly-advice/advise
-   {:form (:form v)
-    :value (-> v :nextjournal.clerk.viewer/result :nextjournal/value)}))
+   {:form (:form clerk-context)
+    :value (-> clerk-context
+               :nextjournal.clerk.viewer/result
+               :nextjournal/value)}))
 
 (defn add-relevant-viewer! []
   (clerk/add-viewers!
-   [{:pred (fn [v]
-             (when-let [k (-> v
-                              extract-context
+   [{:pred (fn [clerk-context]
+             (when-let [k (-> clerk-context
+                              extract-kindly-context
                               :kind)]
                (-> k
                    (@*kinds-to-ignore)
                    not)))
      :transform-fn (clerk/update-val
-                    (fn [v]
-                      (let [{:keys [kind value]} (extract-context v)]
+                    (fn [clerk-context]
+                      (let [{:keys [kind value]} (extract-kindly-context clerk-context)]
                         (if-let [transform (@*kind->transform kind)]
                           (transform value)
                           (clerk/html [:p "Unsupported kind "
@@ -66,40 +68,34 @@
 (add-kind-transform!
  :kind/hiccup clerk/html)
 
+(add-kind-transform!
+ :kind/md (fn [v]
+            (->> v
+                 (string/join "\n")
+                 clerk/md)))
 
-
-;; (add-kind-transform!
-;;  :kind/md (fn [v]
-;;             (if (sequential? v)
-;;               (->> v
-;;                    (string/join "\n")
-;;                    clerk/md)
-;;               (-> v
-;;                   str
-;;                   clerk/md))))
-
-;; (add-kind-transform!
-;;  :kind/dataset (fn [v]
-;;                  (clerk/html
-;;                   [:code {:class :scicloj-dataset}
-;;                    [:style "
-;; .scicloj-dataset th {
-;;   padding: 2px;
-;; }
-;; .scicloj-dataset td {
-;;   padding: 2px;
-;; }
-;; .scicloj-dataset th {
-;;   background-color: #ddd;
-;; }
-;; .scicloj-dataset tr:nth-child(even) {
-;;   background-color: #f6f6f6;
-;; }
-;; "]
-;;                    (-> v
-;;                        pprint/pprint
-;;                        with-out-str
-;;                        clerk/md)])))
+(add-kind-transform!
+ :kind/dataset (fn [v]
+                 (clerk/html
+                  [:code {:class :scicloj-dataset}
+                   [:style "
+.scicloj-dataset th {
+  padding: 2px;
+}
+.scicloj-dataset td {
+  padding: 2px;
+}
+.scicloj-dataset th {
+  background-color: #ddd;
+}
+.scicloj-dataset tr:nth-child(even) {
+  background-color: #f6f6f6;
+}
+"]
+                   (-> v
+                       pprint/pprint
+                       with-out-str
+                       clerk/md)])))
 
 ;; (add-kind-transform!
 ;;  :kind/table
@@ -127,14 +123,14 @@
 ;;                         (map #(->> column-names
 ;;                                    (map %))))})))))))
 
-;; (add-kind-transform!
-;;  :kind/cytoscape (fn [v]
-;;                    (clerk.viewer/with-viewer
-;;                      viewers/cytoscape-viewer
-;;                      v)))
+(add-kind-transform!
+ :kind/cytoscape (fn [v]
+                   (clerk.viewer/with-viewer
+                     viewers/cytoscape-viewer
+                     v)))
 
-;; (add-kind-transform!
-;;  :kind/echarts (fn [v]
-;;                  (clerk.viewer/with-viewer
-;;                    viewers/echarts-viewer
-;;                    v)))
+(add-kind-transform!
+ :kind/echarts (fn [v]
+                 (clerk.viewer/with-viewer
+                   viewers/echarts-viewer
+                   v)))

@@ -1,22 +1,22 @@
 (ns index
-  (:require [scicloj.kindly.v3.api :as kindly]
-            [scicloj.kindly.v3.kind :as kind]
+  (:require [scicloj.kindly.v4.kind :as kind]
             [scicloj.kind-clerk.api :as kind-clerk]))
 
-;; Setup Clerk for Kindly.
 (kind-clerk/setup!)
 
-;; ## Hiccup
+;; ## afsdfasfd
 
-(-> [:big 1234]
-    (kindly/consider :kind/hiccup))
+(+ 1 2)
 
-(-> ["
+(kind/hiccup
+ [:big 1234])
+
+(kind/md
+ "
 * a
 * b
 * c
-* d"]
-    (kindly/consider :kind/md))
+* d")
 
 
 ;; ## Vega-Lite
@@ -30,8 +30,7 @@
    :encoding {:x {:field :x :type :quantitative}
               :y {:field :y :type :quantitative}}})
 
-(-> vega-lite-example
-    (kindly/consider :kind/vega-lite))
+(kind/vega-lite vega-lite-example)
 
 ;; ## Cytoscape
 
@@ -57,8 +56,7 @@
    :layout {:name "preset"
             :padding 5}})
 
-(-> cytoscape-example
-    (kindly/consider :kind/cytoscape))
+(kind/cytoscape cytoscape-example)
 
 ;; ## Echarts
 
@@ -68,8 +66,7 @@
    :series [{:type "bar"
              :data [23 24 18 25 27 28 25]}]})
 
-(-> echarts-example
-    (kindly/consider :kind/echarts))
+(kind/echarts echarts-example)
 
 ;; ## Datasets
 
@@ -88,16 +85,16 @@
 (-> {:x [1 3 5]
      :y [2 4 6]}
     tc/dataset
-    (kindly/consider :kind/table))
+    kind/table)
 
 (-> {:column-names [:x :y]
      :row-vectors [[1 2]
                    [3 4]
                    [5 6]]}
-    (kindly/consider :kind/table))
+    kind/table)
 
 (-> {:column-names [:x :y]
      :row-maps [{:x 1 :y 2}
                 {:x 3 :y 4}
                 {:x 5 :y 6}]}
-    (kindly/consider :kind/table))
+    kind/table)

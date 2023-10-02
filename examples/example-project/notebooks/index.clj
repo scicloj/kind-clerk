@@ -16,9 +16,13 @@
 
 ;; ## Hiccup
 
-
 (kind/hiccup
  [:big 1234])
+
+^:kind/hiccup
+[:big 1234]
+
+;; ## Markdown
 
 (kind/md
  "

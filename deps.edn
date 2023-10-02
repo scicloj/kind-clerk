@@ -1,11 +1,11 @@
 {:deps {org.clojure/clojure         {:mvn/version "1.10.3"}
-        org.scicloj/kindly {:mvn/version "3-alpha8"}
-        io.github.nextjournal/clerk {:mvn/version "0.12.707"}}
+        org.scicloj/kindly {:mvn/version "4-alpha4"}
+        org.scicloj/kindly-advice {:mvn/version "1-alpha3"}
+        io.github.nextjournal/clerk {:mvn/version "0.15.957"}}
  :aliases {:build {:deps {io.github.seancorfield/build-clj
                           {:git/tag "v0.6.4" :git/sha "c21cfde"}}
                    :ns-default build}
-           :dev {:extra-deps {org.scicloj/kindly-default {:mvn/version "1-alpha5"}
-                              scicloj/tablecloth {:mvn/version "6.102"}}}
+           :dev {:extra-deps {scicloj/tablecloth {:mvn/version "7.007"}}}
            :test {:extra-paths ["test"]
                   :extra-deps {org.clojure/test.check {:mvn/version "1.1.1"}
                                io.github.cognitect-labs/test-runner

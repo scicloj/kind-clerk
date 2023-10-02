@@ -58,15 +58,15 @@
 
 
 (add-kind-to-ignore! :kind/image)
+(add-kind-to-ignore! :kind/vector)
+(add-kind-to-ignore! :kind/seq)
+(add-kind-to-ignore! :kind/map)
+(add-kind-to-ignore! :kind/set)
 
-(add-kind-transform!
- :kind/vega-lite clerk/vl)
+(add-kind-transform! :kind/vega-lite clerk/vl)
+(add-kind-transform! :kind/vega clerk/vl)
 
-(add-kind-transform!
- :kind/vega clerk/vl)
-
-(add-kind-transform!
- :kind/hiccup clerk/html)
+(add-kind-transform! :kind/hiccup clerk/html)
 
 (add-kind-transform!
  :kind/md (fn [v]

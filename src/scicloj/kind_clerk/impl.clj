@@ -77,8 +77,12 @@
 (add-kind-transform!
  :kind/dataset (fn [v]
                  (clerk/html
-                  [:code {:class :scicloj-dataset}
+                  [:code
+                   {:class :scicloj-dataset}
                    [:style "
+.scicloj-dataset {
+  background-color: #fff;
+}
 .scicloj-dataset th {
   padding: 2px;
 }

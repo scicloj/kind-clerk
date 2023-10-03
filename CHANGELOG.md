@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
-## [1-alpha4-SNAPSHOT]
+## [1-alpha4] - 2023-10-03
 - adapting to kindly v4
 - adapting to changes in clerk
 - taking not only value but also form into account

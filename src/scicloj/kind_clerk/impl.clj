@@ -123,14 +123,14 @@
                         (map #(->> column-names
                                    (map %))))})))))))
 
-(add-kind-transform!
- :kind/cytoscape (fn [v]
-                   (clerk.viewer/with-viewer
-                     viewers/cytoscape-viewer
-                     v)))
+;; (add-kind-transform!
+;;  :kind/cytoscape (fn [v]
+;;                    (clerk.viewer/with-viewer
+;;                      viewers/cytoscape-viewer
+;;                      v)))
 
-(add-kind-transform!
- :kind/echarts (fn [v]
-                 (clerk.viewer/with-viewer
-                   viewers/echarts-viewer
-                   v)))
+;; (add-kind-transform!
+;;  :kind/echarts (fn [v]
+;;                  (clerk.viewer/with-viewer
+;;                    viewers/echarts-viewer
+;;                    v)))

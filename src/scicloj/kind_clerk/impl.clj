@@ -41,6 +41,14 @@
 (defn add-relevant-viewer! []
   (clerk/add-viewers!
    [{:pred (fn [clerk-context]
+             (-> clerk-context
+                 :nextjournal.clerk.viewer/result
+                 :nextjournal/value
+                 :nextjournal.clerk/var-from-def))
+     :transform-fn (clerk/update-val
+                    (fn [_]
+                      (clerk/md "")))}
+    {:pred (fn [clerk-context]
              (when-let [k (-> clerk-context
                               extract-kindly-context
                               :kind)]

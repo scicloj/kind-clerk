@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
+## [1-alpha6] - 2023-12-25
+- removed unnecessary Kindly dependency
+- updated dev & test deps
+
 ## [1-alpha5] - 2023-10-03
 - changed dataset style
 - handling var-for-def

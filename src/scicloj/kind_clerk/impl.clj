@@ -1,7 +1,5 @@
 (ns scicloj.kind-clerk.impl
-  (:require [scicloj.kindly.v4.api :as kindly]
-            [scicloj.kindly.v4.kind :as kind]
-            [scicloj.kindly-advice.v1.api :as kindly-advice]
+  (:require [scicloj.kindly-advice.v1.api :as kindly-advice]
             [nextjournal.clerk :as clerk]
             [nextjournal.clerk.viewer :as clerk.viewer]
             [clojure.string :as string]

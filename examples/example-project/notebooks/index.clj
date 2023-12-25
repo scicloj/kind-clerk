@@ -32,11 +32,6 @@ clj-img
 ^:kind/hiccup
 [:big 1234]
 
-;; ### Nesting kinds in hiccup (WIP)
-
-(kind/hiccup
- [:div])
-
 ;; ## Markdown
 
 (kind/md

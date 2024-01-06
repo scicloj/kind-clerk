@@ -1,8 +1,8 @@
 {:deps {org.clojure/clojure         {:mvn/version "1.10.3"}
         org.scicloj/kindly-advice {:mvn/version "1-alpha5"}
         io.github.nextjournal/clerk {:mvn/version "0.15.957"}}
- :aliases {:build {:deps {io.github.seancorfield/build-clj
-                          {:git/tag "v0.6.4" :git/sha "c21cfde"}}
+ :aliases {:build {:deps {io.github.clojure/tools.build {:mvn/version "0.9.6"}
+                          slipset/deps-deploy {:mvn/version "0.2.1"}}
                    :ns-default build}
            :dev {:extra-deps {scicloj/tablecloth {:mvn/version "7.021"}
                               org.scicloj/kindly {:mvn/version "4-alpha9"}}}

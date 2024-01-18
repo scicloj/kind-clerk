@@ -1,6 +1,9 @@
 # Change Log
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
+## [1-alpha7] - 2024-01-18
+- updated deps
+
 ## [1-alpha6] - 2023-12-25
 - removed unnecessary Kindly dependency
 - updated dev & test deps

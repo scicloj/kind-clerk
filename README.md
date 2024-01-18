@@ -6,6 +6,10 @@ It is part of an ongoing attemt to create a common ground for Clojure learning r
 
 [![Clojars Project](https://img.shields.io/clojars/v/org.scicloj/kind-clerk.svg)](https://clojars.org/org.scicloj/kind-clerk)
 
+## Status
+* already useful for common tasks
+* partial - some main visualization kinds are not implemented yet
+
 ## Usage
 
 After calling the `setup!` function at the relevant namespace,

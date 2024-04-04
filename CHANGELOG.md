@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
+## [1-alpha8] - 2024-04-05
+- updated deps
+- added `:kind/plotly` support
+
 ## [1-alpha7] - 2024-01-18
 - updated deps
 

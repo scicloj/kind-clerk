@@ -71,7 +71,7 @@
 
 (add-kind-transform! :kind/vega-lite clerk/vl)
 (add-kind-transform! :kind/vega clerk/vl)
-
+(add-kind-transform! :kind/plotly clerk/plotly)
 (add-kind-transform! :kind/hiccup clerk/html)
 
 (add-kind-transform!

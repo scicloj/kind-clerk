@@ -85,6 +85,26 @@ clj-img
   :series [{:type "bar"
             :data [23 24 18 25 27 28 25]}]})
 
+;; ## Plotly
+
+(kind/plotly
+ (let [n 20
+       walk (fn [bias]
+              (->> (repeatedly n #(-> (rand)
+                                      (- 0.5)
+                                      (+ bias)))
+                   (reductions +)))]
+   {:data [{:x (walk 1)
+            :y (walk -1)
+            :z (map #(* % %)
+                    (walk 2))
+            :type :scatter3d
+            :mode :lines+markers
+            :opacity 0.2
+            :line {:width 10}
+            :marker {:size 20
+                     :colorscale :Viridis}}]}))
+
 ;; ## Datasets
 
 ;; Currently, datasets are printed and rendered as Markdown.

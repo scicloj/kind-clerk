@@ -1,4 +1,4 @@
-{:deps {scicloj/tablecloth {:mvn/version "7.007"}
-        org.scicloj/kindly {:mvn/version "4-alpha13"}
-        org.scicloj/kind-clerk {:mvn/version "1-alpha7"}}
+{:deps {scicloj/tablecloth {:mvn/version "7.021"}
+        org.scicloj/kindly {:mvn/version "4-beta1"}
+        org.scicloj/kind-clerk {:mvn/version "1-alpha8"}}
  :paths ["src"]}

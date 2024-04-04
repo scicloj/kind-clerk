@@ -15,7 +15,7 @@
             [deps-deploy.deps-deploy :as dd]))
 
 (def lib 'org.scicloj/kind-clerk)
-(def version "1-alpha7")
+(def version "1-alpha8")
 (def snapshot (str version "-SNAPSHOT"))
 (def class-dir "target/classes")
 

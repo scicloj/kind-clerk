@@ -4,7 +4,8 @@
             [nextjournal.clerk.viewer :as clerk.viewer]
             [clojure.string :as string]
             [clojure.pprint :as pprint]
-            [scicloj.kind-clerk.viewers :as viewers]))
+            [scicloj.kind-clerk.viewers :as viewers]
+            [nextjournal.clerk.viewer :as v]))
 
 (defn value->kind [v]
   (-> {:value v}
@@ -22,45 +23,42 @@
 (defn add-kind-transform! [kind transform]
   (swap! *kind->transform assoc kind transform))
 
-(let [pred (fn [v]
-             (when-let [k (value->kind v)]
-               (-> k
-                   (@*kinds-to-ignore)
-                   not)))]
-  (pred (+ 1 2)))
-
 (defn extract-kindly-context [clerk-context]
   (kindly-advice/advise
    {:form (:form clerk-context)
     :value (-> clerk-context
-               :nextjournal.clerk.viewer/result
                :nextjournal/value)}))
+
+(defn extract-kindly-context-pred [clerk-context]
+  (kindly-advice/advise
+   {
+    :value  clerk-context}))
+
 
 (defn add-relevant-viewer! []
   (clerk/add-viewers!
-   [{:pred (fn [clerk-context]
-             (-> clerk-context
-                 :nextjournal.clerk.viewer/result
-                 :nextjournal/value
-                 :nextjournal.clerk/var-from-def))
+   [
+    {:pred v/var-from-def?
      :transform-fn (clerk/update-val
                     (fn [_]
                       (clerk/md "")))}
+
     {:pred (fn [clerk-context]
+             
              (when-let [k (-> clerk-context
-                              extract-kindly-context
+                              extract-kindly-context-pred
                               :kind)]
                (-> k
                    (@*kinds-to-ignore)
                    not)))
-     :transform-fn (clerk/update-val
-                    (fn [clerk-context]
-                      (let [{:keys [kind value]} (extract-kindly-context clerk-context)]
-                        (if-let [transform (@*kind->transform kind)]
-                          (transform value)
-                          (clerk/html [:p "Unsupported kind "
-                                       [:code (pr-str kind)]
-                                       "."])))))}]))
+     :transform-fn
+     (fn [clerk-context]
+       (let [{:keys [kind value]} (extract-kindly-context clerk-context)]
+         (if-let [transform (@*kind->transform kind)]
+           (transform value)
+           (clerk/html [:p "Unsupported kind "
+                        [:code (pr-str kind)]
+                        "."]))))}]))
 
 
 (add-kind-to-ignore! :kind/image)
@@ -133,14 +131,14 @@
                         (map #(->> column-names
                                    (map %))))})))))))
 
-;; (add-kind-transform!
-;;  :kind/cytoscape (fn [v]
-;;                    (clerk.viewer/with-viewer
-;;                      viewers/cytoscape-viewer
-;;                      v)))
+(add-kind-transform!
+ :kind/cytoscape (fn [v]
+                   (clerk.viewer/with-viewer
+                     viewers/cytoscape-viewer
+                     v)))
 
-;; (add-kind-transform!
-;;  :kind/echarts (fn [v]
-;;                  (clerk.viewer/with-viewer
-;;                    viewers/echarts-viewer
-;;                    v)))
+(add-kind-transform!
+ :kind/echarts (fn [v]
+                 (clerk.viewer/with-viewer
+                   viewers/echarts-viewer
+                   v)))

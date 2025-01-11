@@ -2,8 +2,6 @@
 
 This library adapts the [Clerk](https://clerk.vision/) tool to support the [Kindly](https://scicloj.github.io/kindly/) convention for Clojure literate programming.
 
-❗ It is currently outdated. [The example project](https://github.com/scicloj/kind-clerk/tree/main/examples/example-project) works with Clerk version 0.15.957 but fails with later versions.
-
 [![Clojars Project](https://img.shields.io/clojars/v/org.scicloj/kind-clerk.svg)](https://clojars.org/org.scicloj/kind-clerk)
 
 ## Status

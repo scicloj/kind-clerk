@@ -1,7 +1,4 @@
 {:deps {scicloj/tablecloth {:mvn/version "7.021"}
         org.scicloj/kindly {:mvn/version "4-beta14"}
-        org.scicloj/kind-clerk {:git/url "https://github.com/behrica/kind-clerk"
-                                :git/sha "1b390ed5a16672f8e797ebe2859bdba31b883213"
-                                ;:mvn/version "1-alpha8"
-                                }}
+        org.scicloj/kind-clerk {:mvn/version "1-alpha9"}}
  :paths ["src"]}

@@ -13,3 +13,7 @@ pom.xml.asc
 .cpcache
 .clerk
 .nrepl-port
+.clj-kondo
+.lsp
+.calva
+src/nb.clj

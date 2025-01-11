@@ -1,12 +1,15 @@
 {:deps {org.clojure/clojure         {:mvn/version "1.10.3"}
-        org.scicloj/kindly-advice {:mvn/version "1-beta1"}
-        io.github.nextjournal/clerk {:mvn/version "0.15.957"}}
- :aliases {:build {:deps {io.github.clojure/tools.build {:mvn/version "0.9.6"}
-                          slipset/deps-deploy {:mvn/version "0.2.1"}}
-                   :ns-default build}
-           :dev {:extra-deps {scicloj/tablecloth {:mvn/version "7.021"}
-                              org.scicloj/kindly {:mvn/version "4-beta1"}}}
-           :test {:extra-paths ["test"]
-                  :extra-deps {org.clojure/test.check {:mvn/version "1.1.1"}
-                               io.github.cognitect-labs/test-runner
-                               {:git/tag "v0.5.0" :git/sha "48c3c67"}}}}}
+        org.scicloj/kindly-advice {:mvn/version "1-beta12"}
+        io.github.nextjournal/clerk {:mvn/version "0.17.1102"}
+        
+        }
+        
+        :aliases {:build {:deps {io.github.clojure/tools.build {:mvn/version "0.9.6"}
+                                 slipset/deps-deploy {:mvn/version "0.2.1"}}
+                          :ns-default build}
+                  :dev {:extra-deps {scicloj/tablecloth {:mvn/version "7.021"}
+                                     org.scicloj/kindly {:mvn/version "4-beta14"}}}
+                  :test {:extra-paths ["test"]
+                         :extra-deps {org.clojure/test.check {:mvn/version "1.1.1"}
+                                      io.github.cognitect-labs/test-runner
+                                      {:git/tag "v0.5.0" :git/sha "48c3c67"}}}}}

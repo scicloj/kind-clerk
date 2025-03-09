@@ -1,0 +1,165 @@
+
+The follwoing snipptes crash Clerk page rendering, so are not in kinds.clj
+
+
+;; Scittle and Reagent kinds are recognized automatically
+;; inside Hiccup:
+
+;; * A list beginning with a symbol means `kind/scittle`.
+;; * A vector with a list beginning with a symbol means `kind/reagent`.
+
+(kind/hiccup
+ [:div
+  ;; recognized as `kind/scittle`
+  '(defn g [x]
+     (+ x 9))
+  ;; recognized as `kind/reagent`
+  ['(fn []
+      [:p (g 11)])]])
+
+;; A more detailed nesting example:
+(kind/hiccup
+ [:div {:style {:background "#f5f3ff"
+                :border "solid"}}
+
+  [:hr]
+  [:pre [:code "kind/md"]]
+  (kind/md "*some text* **some more text**")
+
+  [:hr]
+  [:pre [:code "kind/code"]]
+  (kind/code "{:x (1 2 [3 4])}")
+
+  [:hr]
+  [:pre [:code "kind/dataset"]]
+  (tc/dataset {:x (range 13)
+               :y (map inc (range 13))})
+  [:hr]
+  [:pre [:code "kind/table"]]
+  (kind/table
+   (tc/dataset {:x (range 13)
+                :y (map inc (range 13))})
+   {:style {:height "200px"}})
+  [:hr]
+  [:pre [:code "kind/vega-lite"]]
+  (-> {:data {:values "x,y
+1,1
+2,4
+3,9
+-1,1
+-2,4
+-3,9"
+              :format {:type :csv}},
+       :mark "point"
+       :encoding
+       {:x {:field "x", :type "quantitative"}
+        :y {:field "y", :type "quantitative"}}}
+      kind/vega-lite)
+
+  [:hr]
+  [:pre [:code "kind/reagent"]
+   [:p "(automatically recognized without annotation)"]]
+  ;; Recognized as `kind/reagent`:
+  ['(fn [numbers]
+      [:p {:style {:background "#d4ebe9"}}
+       (pr-str (map inc numbers))])
+   (vec (range 40))]])
+
+
+
+
+
+
+
+
+
+
+
+
+;; Lack of column names produces table without a header.
+
+(kind/table
+ {:row-vectors (take 5 people-as-vectors)})
+
+
+
+;; Column names are inferred from a sequence of maps
+
+(kind/table
+ {:row-maps (take 5 people-as-maps)})
+
+
+
+;; We can limit displayed columns for sequence of maps case.
+
+(kind/table
+ {:column-names [:preferred-language]
+  :row-maps (take 5 people-as-maps)})
+
+;; Sequence of sequences and sequence of maps also work
+
+(kind/table (take 5 people-as-vectors))
+
+(kind/table (take 5 people-as-maps))
+
+;; Additionally map of sequences is supported (unless it contains `:row-vectors` or `:row-maps` key, see such case above).
+
+(kind/table {:x (range 6)
+             :y [:A :B :C :A :B :C]})
+
+;; A dataset can be also treated as a table input.
+
+(def people-as-dataset
+  (tc/dataset people-as-maps))
+
+(-> people-as-dataset
+    kind/table)
+
+;; Additional options may hint at way the table should be rendered.
+(-> people-as-dataset
+    (kind/table {:element/max-height "300px"}))
+
+;; Some tools support [datatables](https://datatables.net/)
+;; for displaying tables.
+;; This can be expressed using the `:use-datatables` option.
+
+(-> people-as-maps
+    tc/dataset
+    (kind/table {:use-datatables true}))
+
+;; In addition, the `:datatables` option can be used to control
+;; [datatables options](https://datatables.net/manual/options)
+;; (see [the full list](https://datatables.net/reference/option/)).
+
+(-> people-as-dataset
+    (kind/table {:use-datatables true
+                 :datatables {:scrollY 200}}))
+
+
+
+
+
+
+;; The `kind/table` has recursive semantics:
+;; if the values inside them have kind information,
+;; they should be handled accordingly.
+
+(kind/table
+ {:column-names [(kind/code ":x")
+                 (kind/code ":y")]
+  :row-vectors [[(kind/md "*some text* **some more text**")
+                 (kind/code "{:x (1 2 [3 4])}")]
+                [(tc/dataset {:x (range 3)
+                              :y (map inc (range 3))})
+                 vega-lite-plot]
+                [(kind/hiccup [:div {:style {:height 200}}
+                               tree-image])
+                 (kind/md "$x^2$")]]})
+
+
+
+
+
+
+
+

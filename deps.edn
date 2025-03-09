@@ -1,5 +1,7 @@
-{:deps {org.clojure/clojure         {:mvn/version "1.10.3"}
-        org.scicloj/kindly-advice {:mvn/version "1-beta12"}
+{:deps {org.clojure/clojure         {:mvn/version "1.12.0"}
+        org.scicloj/kindly-render {:mvn/version "0.1.2-alpha"}
+        org.clojure/data.json {:mvn/version "2.5.1"}
+        cheshire/cheshire {:mvn/version "5.13.0"}
         io.github.nextjournal/clerk {:mvn/version "0.17.1102"}
         
         }
@@ -7,8 +9,9 @@
         :aliases {:build {:deps {io.github.clojure/tools.build {:mvn/version "0.9.6"}
                                  slipset/deps-deploy {:mvn/version "0.2.1"}}
                           :ns-default build}
-                  :dev {:extra-deps {scicloj/tablecloth {:mvn/version "7.021"}
-                                     org.scicloj/kindly {:mvn/version "4-beta14"}}}
+                  :dev {:extra-deps {
+                                     org.scicloj/noj {:mvn/version "2-beta9.1"}
+                                     }}
                   :test {:extra-paths ["test"]
                          :extra-deps {org.clojure/test.check {:mvn/version "1.1.1"}
                                       io.github.cognitect-labs/test-runner
